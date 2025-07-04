@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  base: '/',  // Keep as '/' if deploying to root domain
+  base: import.meta.env.VITE_BASE_PATH_ || /portfoliovd-zt8r/,
   plugins: [react(), tailwindcss()],
   server: {
     historyApiFallback: true,  // Required for React Router
