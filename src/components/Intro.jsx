@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Navbar'
 import './Intro.css';
-import './Fonts/font.css'
 
 const Intro = ({ onIntroComplete }) => {
   const [animationStage, setAnimationStage] = useState('entering');

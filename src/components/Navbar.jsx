@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { FaMoon, FaSun, FaBars, FaTimes, FaPalette } from 'react-icons/fa';
 import '../hooks/Navbahook';
 import './navbar.css';
-import './Fonts/font.css';
 import './Themes/Theme2.css';
 import './Themes/Theme3.css';
 import './Themes/Theme4.css';
@@ -256,7 +255,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
             onClick={closeMenu}
           >
             <img
-              src="svglogo.svg"
+              src="images\svglogo.svg"
               alt="Logo"
             />
           </a>

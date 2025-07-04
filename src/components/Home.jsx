@@ -6,20 +6,19 @@ import Navbar from './Navbar.jsx';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './Home.css';
-
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 const TechIcon = ({ icon, onClick }) => {
   // Define all icon sources in a centralized object
   const iconSources = {
-    html: "images/htmlicon.png",
+    html: "/images/htmlicon.png",
     staricon: "images/staricon.png",
-    js: "images/jsicon.png",
-    react: "images/reacticon.png",
-    vscode: "images/vscodeicon.png",
-    css: "images/cssicon.png",
-    github: "images/githubicon.png",
+    js: "/images/jsicon.png",
+    react: "/images/reacticon.png",
+    vscode: "/images/vscodeicon.png",
+    css: "/images/cssicon.png",
+    github: "/images/githubicon.png",
   };
 
   return (
@@ -373,7 +372,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
               <div className="profileimg">
                 <div className="profile-placeholder">
                   <img
-                    src="images/homeimage.jpg"
+                    src="/images/homeimage.jpg"
                     alt="Profile"
                     loading="lazy"
                     onError={(e) => {

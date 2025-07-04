@@ -2,10 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* font-family: 'Golfee', sans-serif; */
-    /* font-family: 'Careny', sans-serif; */
-    /* font-family: 'Farabee', sans-serif; */
-    /* font-family: 'Russolo', sans-serif; */
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 ::-webkit-scrollbar {
