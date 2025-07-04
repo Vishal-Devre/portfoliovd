@@ -1,0 +1,54 @@
+/* Purple theme */
+.theme5 {
+    --masking: linear-gradient(to top, #00000000 2%, #000000 30%);
+    --body-bg: linear-gradient(135deg, #ffffff 0%, #eedaff 100%);
+    --logo: invert(1);
+    --link: #190027;
+    --nav-bg: #00000005;
+    --main-heading: #b300ff;
+    --secondary-heading: #8900c4;
+    --text-color: #000000;
+    --text-fade: #4a2d5c;
+    --color: #150018;
+    --secondary-color: #4a148c;
+    --primary-color: #27003f;
+    --btn-bg: radial-gradient(circle farthest-corner at -5.6% -6.8%, #8d50ff 37.3%, #bb94ff 73.5%);
+    --btn-bg-hover: radial-gradient(circle farthest-corner at -5.6% -6.8%, rgb(149, 95, 243) 37.3%, #7136e0 73.5%);
+    --btn-color: #ffffff;
+    --shadow-color: #29004264;
+    --card-bg: rgb(255, 255, 255);
+    --skill-bg: #6a1b9a18;
+    --skill-progress: #7c52ca;
+    --minicard-bg: #df7fcc4a;
+    --border-b: #ba68c8;
+    --icon-color: #f9d6ff;
+    --contact-icons-bg: linear-gradient(135deg, #23005c 0%, #915eff 100%);
+    --contact-input-bg: #e7deff;
+}
+
+.theme5.dark {
+    --masking: linear-gradient(to top, #00000000 2%, #000000 30%);
+    --body-bg: linear-gradient(135deg, #1a0033 0%, #3d1a66 100%);
+    --logo: invert(0);
+    --link: #f3ebff;
+    --nav-bg: #00000005;
+    --main-heading: #d904ff;
+    --text-color: #f3e5ff;
+    --text-fade: #c2aee8;
+    --color: #fcedff;
+    --secondary-color: #ffffff;
+    --primary-color: #e1bee7;
+    --secondary-heading: #ba68c8;
+    --btn-bg: radial-gradient(circle farthest-corner at -5.6% -6.8%, #7136e0 37.3%, #955ff3 73.5%);
+    --btn-bg-hover: radial-gradient(circle farthest-corner at -5.6% -6.8%, rgb(149, 95, 243) 37.3%, #7136e0 73.5%);
+    --btn-color: #ffffff;
+    --shadow-color: #1f1f1f5a;
+    --card-bg: rgb(30, 0, 60);
+    --skill-bg: #b388ff18;
+    --skill-progress: #7136e0;
+    --minicard-bg: #7e57c21a;
+    --border-b: #b388ff;
+    --icon-color: #25006b;
+    --contact-input-bg: #4a148c;
+    --contact-icons-bg: linear-gradient(135deg, #925af2 0%, #e7dbff 100%);
+}

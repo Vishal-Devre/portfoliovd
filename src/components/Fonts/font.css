@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Russolo';
+    src: url('./components/fonts/Russolo.woff') format('woff');
+    font-display: swap;
+    /* Optional: improves performance */
+    font-weight: 900;
+}
+
+
+@font-face {
+    font-family: 'Antique-Olive';
+    src: url('./components/fonts/Antique-Olive.ttf') format('woff');
+    font-display: swap;
+    /* Optional: improves performance */
+    font-weight: 900;
+}
