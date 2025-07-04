@@ -41,10 +41,11 @@ function App() {
           <>
             <Loader />
             <Routes>
-              <Route path={`/`}element={<Home darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
-              <Route path={`/about`} element={<About darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
-              <Route path={`/projects`} element={<Projects darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
-              <Route path={`/contact`} element={<Contact darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+              {/* Remove template literals from paths */}
+              <Route path="/" element={<Home darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+              <Route path="/about" element={<About darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+              <Route path="/projects" element={<Projects darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+              <Route path="/contact" element={<Contact darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
             </Routes>
           </>
         )}
