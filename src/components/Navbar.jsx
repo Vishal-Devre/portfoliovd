@@ -3,7 +3,7 @@ import { FaMoon, FaSun, FaBars, FaTimes, FaPalette } from 'react-icons/fa';
 import '../hooks/Navbahook';
 import './navbar.css';
 import './Fonts/font.css';
-import './Themes/theme2.css';
+import './Themes/Theme2.css';
 import './Themes/Theme3.css';
 import './Themes/Theme4.css';
 import './Themes/Theme1.css';

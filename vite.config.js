@@ -1,18 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  base: /portfoliovd-zt8r/,
-  plugins: [react(), tailwindcss()],
+  base: '/',
+  plugins: [react()],
   server: {
-    historyApiFallback: true,  // Required for React Router
+    historyApiFallback: true,
   },
   build: {
     outDir: 'dist',
-    emptyOutDir: true,  // Clear dist folder on rebuild
+    emptyOutDir: true,
   },
   preview: {
-    historyApiFallback: true,  // Required for `npm run preview`
-  },
+    historyApiFallback: true,
+  }
 });
