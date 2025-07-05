@@ -15,7 +15,7 @@ const About = ({ darkMode, toggleDarkMode }) => {
     { name: 'JavaScript', level: 45 },
     { name: 'Python', level: 38 },
     { name: 'React', level: 45 },
-    { name: 'Node.js', level: 10 },
+    { name: 'Node.js', level: 23 },
   ];
 
   const container = useRef();
@@ -43,7 +43,7 @@ const About = ({ darkMode, toggleDarkMode }) => {
     gsap.utils.toArray(".about-hero-text").forEach((section) => {
       gsap.from(section, {
         y: 50,
-        delay:.1,
+        delay: .1,
         duration: 0.7,
         opacity: 0,
         ease: "power2.out",
@@ -58,7 +58,7 @@ const About = ({ darkMode, toggleDarkMode }) => {
     gsap.utils.toArray(".about-image-container").forEach((section) => {
       gsap.from(section, {
         y: 80,
-        delay:.2,
+        delay: .2,
         duration: 0.7,
         opacity: 0,
         ease: "power2.out",
@@ -119,7 +119,7 @@ const About = ({ darkMode, toggleDarkMode }) => {
           <div className="about-hero-parent">
             <div className="about-hero">
               <div className="about-hero-text">
-                <h1 className="hero-title">Hellow!</h1>
+                <h1 className="hero-title">Hello!</h1>
                 <p className="hero-subtitle">
                   I'm <span className="highlight">Vishal Devre</span>, a passionate Full-Stack Web Developer with a passion for building interactive web experiences.
                 </p>
@@ -168,15 +168,15 @@ const About = ({ darkMode, toggleDarkMode }) => {
           {/* Stats Section */}
           <div className="stats-section">
             <div className="stats-item">
-              <h3><span className="count-number" data-count="10">0</span>+</h3>
+              <h3><span className="count-number" data-count="8">0</span>+</h3>
               <p>Projects</p>
             </div>
             <div className="stats-item">
-              <h3><span className="count-number" data-count="7">0</span>+</h3>
+              <h3><span className="count-number" data-count="4">0</span>+</h3>
               <p>Completed</p>
             </div>
             <div className="stats-item">
-              <h3><span className="count-number" data-count="35">0</span>+</h3>
+              <h3><span className="count-number" data-count="12">0</span>+</h3>
               <p>Technologies</p>
             </div>
           </div>

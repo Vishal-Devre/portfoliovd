@@ -354,6 +354,10 @@
 }
 
 @media (max-width: 480px) {
+  .projects-title {
+    margin: 25px 0 0 0;
+  }
+
   .projects-section {
     padding: 2rem 1rem;
   }

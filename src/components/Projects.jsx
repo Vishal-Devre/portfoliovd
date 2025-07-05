@@ -151,149 +151,149 @@ const Projects = ({ darkMode, toggleDarkMode }) => {
   return (
     <>
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        <section id="projects" className={`projects-section ${darkMode ? 'dark' : 'light'}`}>
-          <div className="projects-container">
-            <h1 className="projects-title">My Projects</h1>
-            <p className="projects-subtitle">Here are some of my recent works</p>
+      <section id="projects" className={`projects-section ${darkMode ? 'dark' : 'light'}`}>
+        <div className="projects-container">
+          <h1 className="projects-title">My Projects</h1>
+          <p className="projects-subtitle">Here are some of my recent works</p>
 
-            <div className="projects-alternate-layout">
-              {projects.map((project, index) => (
-                <div key={project.id} className={`project-row ${index % 1 !== 0 ? 'right' : 'left'}`}>
-                  {index % 2 !== 0 ? (
-                    <>
-                      <div className="project-description-text">
-                        <h3>Project Highlights</h3>
-                        <p>The {project.title} was built to solve real-world problems using {project.technologies.join(', ')}.</p>
-                        <p>Key features include responsive design, clean code architecture, and user-friendly interface.</p>
+          <div className="projects-alternate-layout">
+            {projects.map((project, index) => (
+              <div key={project.id} className={`project-row ${index % 1 !== 0 ? 'right' : 'left'}`}>
+                {index % 2 !== 0 ? (
+                  <>
+                    <div className="project-description-text">
+                      <h3>Project Highlights</h3>
+                      <p>The {project.title} was built to solve real-world problems using {project.technologies.join(', ')}.</p>
+                      <p>Key features include responsive design, clean code architecture, and user-friendly interface.</p>
+                    </div>
+                    <div className={`project-card ${darkMode ? 'dark' : 'light'}`}>
+                      <div className="project-image-container">
+                        <img src={project.image} alt={project.title} className="project-image" />
+                        <button
+                          className={`like-btn ${likedProjects.includes(project.id) ? 'liked' : ''}`}
+                          onClick={() => toggleLike(project.id)}
+                        >
+                          <FaHeart />
+                        </button>
+                        <button className="info-btn" onClick={() => openPopup(project)}>
+                          <FaInfoCircle />
+                        </button>
                       </div>
-                      <div className={`project-card ${darkMode ? 'dark' : 'light'}`}>
-                        <div className="project-image-container">
-                          <img src={project.image} alt={project.title} className="project-image" />
-                          <button
-                            className={`like-btn ${likedProjects.includes(project.id) ? 'liked' : ''}`}
-                            onClick={() => toggleLike(project.id)}
-                          >
-                            <FaHeart />
-                          </button>
-                          <button className="info-btn" onClick={() => openPopup(project)}>
-                            <FaInfoCircle />
-                          </button>
+                      <div className="project-content">
+                        <h3 className="project-title">{project.title}</h3>
+                        <p className="project-description">{project.description}</p>
+                        <div className="project-technologies">
+                          {project.technologies.map((tech, i) => (
+                            <span key={i} className="tech-tag">{tech}</span>
+                          ))}
                         </div>
-                        <div className="project-content">
-                          <h3 className="project-title">{project.title}</h3>
-                          <p className="project-description">{project.description}</p>
-                          <div className="project-technologies">
-                            {project.technologies.map((tech, i) => (
-                              <span key={i} className="tech-tag">{tech}</span>
-                            ))}
-                          </div>
-                          <div className="rating-container">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <FaStar
-                                key={star}
-                                className={`star ${star <= (ratings[project.id] || 0) ? 'active' : ''}`}
-                                onClick={() => handleRating(project.id, star)}
-                              />
-                            ))}
-                          </div>
+                        <div className="rating-container">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <FaStar
+                              key={star}
+                              className={`star ${star <= (ratings[project.id] || 0) ? 'active' : ''}`}
+                              onClick={() => handleRating(project.id, star)}
+                            />
+                          ))}
                         </div>
-                        <div className="project-links">
-                          <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                            <FaGithub /> Code
+                      </div>
+                      <div className="project-links">
+                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                          <FaGithub /> Code
+                        </a>
+                        {project.liveLink && (
+                          <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                            <FaExternalLinkAlt /> Live Demo
                           </a>
-                          {project.liveLink && (
-                            <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                              <FaExternalLinkAlt /> Live Demo
-                            </a>
-                          )}
+                        )}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={`project-card ${darkMode ? 'dark' : 'light'}`}>
+                      <div className="project-image-container">
+                        <img src={project.image} alt={project.title} className="project-image" />
+                        <button
+                          className={`like-btn ${likedProjects.includes(project.id) ? 'liked' : ''}`}
+                          onClick={() => toggleLike(project.id)}
+                        >
+                          <FaHeart />
+                        </button>
+                        <button className="info-btn" onClick={() => openPopup(project)}>
+                          <FaInfoCircle />
+                        </button>
+                      </div>
+                      <div className="project-content">
+                        <h3 className="project-title">{project.title}</h3>
+                        <p className="project-description">{project.description}</p>
+                        <div className="project-technologies">
+                          {project.technologies.map((tech, i) => (
+                            <span key={i} className="tech-tag">{tech}</span>
+                          ))}
+                        </div>
+                        <div className="rating-container">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <FaStar
+                              key={star}
+                              className={`star ${star <= (ratings[project.id] || 0) ? 'active' : ''}`}
+                              onClick={() => handleRating(project.id, star)}
+                            />
+                          ))}
                         </div>
                       </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className={`project-card ${darkMode ? 'dark' : 'light'}`}>
-                        <div className="project-image-container">
-                          <img src={project.image} alt={project.title} className="project-image" />
-                          <button
-                            className={`like-btn ${likedProjects.includes(project.id) ? 'liked' : ''}`}
-                            onClick={() => toggleLike(project.id)}
-                          >
-                            <FaHeart />
-                          </button>
-                          <button className="info-btn" onClick={() => openPopup(project)}>
-                            <FaInfoCircle />
-                          </button>
-                        </div>
-                        <div className="project-content">
-                          <h3 className="project-title">{project.title}</h3>
-                          <p className="project-description">{project.description}</p>
-                          <div className="project-technologies">
-                            {project.technologies.map((tech, i) => (
-                              <span key={i} className="tech-tag">{tech}</span>
-                            ))}
-                          </div>
-                          <div className="rating-container">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <FaStar
-                                key={star}
-                                className={`star ${star <= (ratings[project.id] || 0) ? 'active' : ''}`}
-                                onClick={() => handleRating(project.id, star)}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                        <div className="project-links">
-                          <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                            <FaGithub /> Code
+                      <div className="project-links">
+                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                          <FaGithub /> Code
+                        </a>
+                        {project.liveLink && (
+                          <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                            {/* <FaExternalLinkAlt />  */}Live Demo
                           </a>
-                          {project.liveLink && (
-                            <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                              {/* <FaExternalLinkAlt />  */}Live Demo
-                            </a>
-                          )}
-                        </div>
+                        )}
                       </div>
-                      <div className="project-description-text">
-                        <h3>About This Project</h3>
-                        <p>This project showcases my skills in {project.technologies.join(', ')}.
-                          It demonstrates my ability to create {project.title.toLowerCase()} with modern web technologies.</p>
-                        <p>Click the info button to learn more about the implementation details.</p>
-                      </div>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
+                    </div>
+                    <div className="project-description-text">
+                      <h3>About This Project</h3>
+                      <p>This project showcases my skills in {project.technologies.join(', ')}.
+                        It demonstrates my ability to create {project.title.toLowerCase()} with modern web technologies.</p>
+                      <p>Click the info button to learn more about the implementation details.</p>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Project Details Popup */}
-          {selectedProject && (
-            <div className="project-popup">
-              <div className="popup-content">
-                <button className="close-btn" onClick={closePopup}>×</button>
-                <h2>{selectedProject.title}</h2>
-                <img src={selectedProject.image} alt={selectedProject.title} />
-                <p>{selectedProject.description}</p>
-                <div className="technologies">
-                  <h4>Technologies:</h4>
-                  <div className="tech-tags">
-                    {selectedProject.technologies.map((tech, index) => (
-                      <span key={index}>{tech}</span>
-                    ))}
-                  </div>
-                </div>
-                <div className="popup-links">
-                  <a href={selectedProject.githubLink} target="_blank" rel="noopener noreferrer">
-                    <FaGithub /> View Code
-                  </a>
-                  <a href={selectedProject.liveLink} target="_blank" rel="noopener noreferrer">
-                    <FaExternalLinkAlt /> Live Demo
-                  </a>
+        {/* Project Details Popup */}
+        {selectedProject && (
+          <div className="project-popup">
+            <div className="popup-content">
+              <button className="close-btn" onClick={closePopup}>×</button>
+              <h2>{selectedProject.title}</h2>
+              <img src={selectedProject.image} alt={selectedProject.title} />
+              <p>{selectedProject.description}</p>
+              <div className="technologies">
+                <h4>Technologies:</h4>
+                <div className="tech-tags">
+                  {selectedProject.technologies.map((tech, index) => (
+                    <span key={index}>{tech}</span>
+                  ))}
                 </div>
               </div>
+              <div className="popup-links">
+                <a href={selectedProject.githubLink} target="_blank" rel="noopener noreferrer">
+                  <FaGithub /> View Code
+                </a>
+                <a href={selectedProject.liveLink} target="_blank" rel="noopener noreferrer">
+                  <FaExternalLinkAlt /> Live Demo
+                </a>
+              </div>
             </div>
-          )}
-        </section>
+          </div>
+        )}
+      </section>
     </>
   );
 };

@@ -327,14 +327,14 @@ const Home = ({ darkMode, toggleDarkMode }) => {
       }
     });
     tl3.fromTo(".mirroreffect",
-      { y: 300, scale: 0.4, opacity: 0.6, },
-      { y: 0, scale: 1, opacity: 1, },
+      { scale: 0.4, opacity: 0.6, },
+      { scale: 1, opacity: 1, },
       "start"
     )
 
     tl3.fromTo(".sec3mirrorbox",
-      { y: 250, opacity: 0.6, },
-      { y: 0, opacity: 1, },
+      { scale: 0, opacity: 0.6, },
+      { scale: 1, opacity: 1, },
       "start"
     )
     return () => tl3.kill(); // Cleanup
@@ -403,7 +403,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
             <div className="sec2container">
               <>
                 <div className="txt1">INNOVATION THROUGH DESIGN</div>
-                <div className="txt2">THE ARE OF INTERACTION</div>
+                <div className="txt2">THE ART OF INTERACTION</div>
               </>
             </div>
             <div className="sec2imgbox">
@@ -429,7 +429,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
         <section className={`section3 ${darkMode ? 'dark' : 'light'}`} ref={section3Ref}>
           <div className="section3-overlay" ref={overlayRef}>
             <div className="circle-intro">
-              <h2>{isMobile ? "Scroll down" : "Scroll it up"}</h2>
+              <h2>{isMobile ? "Scroll..." : "Scroll more"}</h2>
             </div>
 
             <div className="circle-content">
@@ -440,8 +440,8 @@ const Home = ({ darkMode, toggleDarkMode }) => {
                     <div className="sec3mirrorbox"></div>
                   </div>
                 </div>
-                <div className={`big-word top-left`}>something</div>
-                <div className={`big-word bottom-right`}>thoughtful</div>
+                <div className={`big-word top-left`}>SOMETHING</div>
+                <div className={`big-word bottom-right`}>CREATIVE</div>
               </div>
             </div>
           </div>
