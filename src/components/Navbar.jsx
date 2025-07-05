@@ -240,7 +240,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     <>
       <nav
         ref={navbarRef}
-        className={`navbar ${darkMode ? 'dark' : 'light'} ${!navbarVisible ? 'navbar-hidden' : ''}`}
+        className={`navbar ${darkMode ? 'light' : 'dark'} ${!navbarVisible ? 'navbar-hidden' : ''}`}
       >
         <div className="side-box left-box"></div>
         <div className="navbar-container">

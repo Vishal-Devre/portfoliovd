@@ -37,7 +37,7 @@
 /* Base Letter Styles */
 .portfolio-text span {
     color: transparent;
-    -webkit-text-stroke: 3px #0e0015;
+    -webkit-text-stroke: 1px #0e0015;
     opacity: 0;
     transform: translateY(30px) rotateX(75deg);
     transform-origin: bottom center;
@@ -121,14 +121,14 @@
     }
 
     .portfolio-text span {
-        -webkit-text-stroke: 2px #0c001d;
+        -webkit-text-stroke: 1px #0c001d;
         margin: 0 2px;
     }
 }
 
 /* Dark Mode Adjustments */
 .dark .portfolio-text span {
-    -webkit-text-stroke: 3px #0c001d;
+    -webkit-text-stroke: 1px #0c001d;
 }
 
 .dark .portfolio-text span::after {

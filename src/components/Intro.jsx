@@ -32,7 +32,7 @@ const Intro = ({ onIntroComplete }) => {
   return (
     <div className={`intro-container ${animationStage}`}>
       <div className="portfolio-text">
-        {['V', 'I', 'S', 'H', "U's",'\u2060', 'P', 'O', 'R', 'T', 'F', 'O', 'L', 'I', 'O'].map((letter, index) => (
+        {['V', 'I', 'S', 'H', "U's",'-', 'P', 'O', 'R', 'T', 'F', 'O', 'L', 'I', 'O'].map((letter, index) => (
           <span
             key={index}
             className={getLetterClass(index)}
