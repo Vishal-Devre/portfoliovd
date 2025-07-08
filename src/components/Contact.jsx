@@ -142,7 +142,7 @@ const Contact = ({ darkMode, toggleDarkMode }) => {
                             onClick={() => setShowForm(true)}
                             aria-label="Contact me"
                             data-aos="fade-up"
-                            data-aos-delay="100"
+                            data-aos-delay="200"
                         >
                             Contact Me
                         </button>

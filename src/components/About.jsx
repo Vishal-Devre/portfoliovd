@@ -205,7 +205,8 @@ const About = ({ darkMode, toggleDarkMode }) => {
             <h2 className="section-title">My Resume</h2>
             <p>Download my resume to learn more about my qualifications and experience.</p>
             <a
-              href="https://drive.google.com/file/d/1hS-HBarrXZO22j-D5zErrjtNIr2K8vpO/view?usp=sharing"
+              // href="https://drive.google.com/file/d/1hS-HBarrXZO22j-D5zErrjtNIr2K8vpO/view?usp=sharing"
+              href='public\images\Resume.pdf'
               download
               className="resume-button"
             >

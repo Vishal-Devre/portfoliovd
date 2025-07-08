@@ -179,7 +179,7 @@
 .tech-tag {
   background: transparent;
   border-bottom: 2px solid var(--text-fade);
-  color: var(--btn-color);
+  color: var(--color);
   padding: 0.3rem 0.8rem;
   /* border-radius: 20px; */
   font-size: 0.8rem;
