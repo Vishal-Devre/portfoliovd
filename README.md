@@ -1,18 +1,24 @@
-# React + Vite
+# 🌟 Vishal Devre's Portfolio Website  
+A modern, responsive showcase of my frontend skills.  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![LiveDemo](https://img.shields.io/badge/Demo-Live-green?style=for-the-badge)](https://portfoliovd-five.vercel.app)  
+[![GitHub](https://img.shields.io/badge/Code-Repository-blue?style=for-the-badge)](https://github.com/Vishal-Devre)  
 
-Currently, two official plugins are available:
+![Screenshot](images/readme-ss.jpg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## *✨ Features*  
+- 🎨 *6 Dynamic Themes + Dark Mode*  
+- 🚀 *GSAP & AOS Animations* (60 FPS optimized)  
+- 📱 *Fully Responsive* (Mobile to 4K)  
+- 📩 *EmailJS Contact Form* (Messages sent directly to your inbox) 
 
-## Expanding the ESLint configuration
+## *🛠 Tech Stack*  
+- *Frontend*: React + Vite  
+- *Animations*: GSAP, AOS  
+- *Styling*: CSS3, Flexbox/Grid  
+- *Deployment*: Vercel  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-
-<!-- update logo -->
-<!-- Gaming page -->
-<!-- show all my projects, waterdrops, emoji, iG only made by coding  -->
-<!-- pic black pahije and only eyes colored pahije ek rectangle add kr and to remove zala pahije when scroll -->
+## *🚀 Installation*  
+1. Clone the repo:  
+   ```bash
+   git clone https://github.com/Vishal-Devre/portfoliovd.git
