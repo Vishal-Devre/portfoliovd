@@ -4,11 +4,11 @@ A modern, responsive showcase of my frontend skills.
 [![LiveDemo](https://img.shields.io/badge/Demo-Live-green?style=for-the-badge)](https://portfoliovd-five.vercel.app)  
 [![GitHub](https://img.shields.io/badge/Code-Repository-blue?style=for-the-badge)](https://github.com/Vishal-Devre)  
 
-![Screenshot](images/readme-ss.jpg)
+![Screenshot](public/images/readme-ss.png)
 
 ## *✨ Features*  
 - 🎨 *6 Dynamic Themes + Dark Mode*  
-- 🚀 *GSAP & AOS Animations* (60 FPS optimized)  
+- 🚀 *GSAP & AOS Animation* (60 FPS optimized)  
 - 📱 *Fully Responsive* (Mobile to 4K)  
 - 📩 *EmailJS Contact Form* (Messages sent directly to your inbox) 
 
