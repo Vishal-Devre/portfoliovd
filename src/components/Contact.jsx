@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FaInstagram, FaLinkedin, FaFacebook, FaPhone, FaEnvelope, FaMapMarkerAlt, FaTimes, FaCheck, FaExclamationCircle, FaTimesCircle } from 'react-icons/fa';
-import Navbar from './Navbar';
-import './Contact.css';
 import emailjs from '@emailjs/browser';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useEffect, useRef, useState } from 'react';
+import { FaCheck, FaEnvelope, FaExclamationCircle, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaPhone, FaTimes, FaTimesCircle } from 'react-icons/fa';
+import './Contact.css';
+import Navbar from './Navbar';
 
 const initializeEmailJS = () => {
     if (import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
@@ -144,7 +144,7 @@ const Contact = ({ darkMode, toggleDarkMode }) => {
                             data-aos="fade-up"
                             data-aos-delay="200"
                         >
-                            Contact Me
+                            Contact Me →
                         </button>
                     </div>
 
