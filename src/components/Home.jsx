@@ -92,11 +92,11 @@ const AnimatedText = ({ texts, isMobile }) => {
 const Home = ({ darkMode, toggleDarkMode }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [
-    "/public/images/homeimage.jpg",
-    "/public/images/changeimg2.jpg",
+    "/images/homeimage.jpg",
+    "/images/changeimg2.jpg",
     "/images/changeimg3.jpg",
     "/images/changeimg4.jpg",
-    "images/changeimg5.jpg",
+    "/images/changeimg5.jpg",
     "/images/changeimg6.jpg",
   ];
 
