@@ -81,7 +81,7 @@ const Chatbot = ({ isOpen, onClose }) => {
       <div className="chatbot-header">
         <h3>Portfolio Assistant</h3>
         <div className="chatbot-actions">
-          <button onClick={() => setIsMinimized(!isMinimized)}>
+          <button className="chatbot-actions" onClick={() => setIsMinimized(!isMinimized)}>
             {isMinimized ? <MdKeyboardArrowUp size={16} /> : <MdRemove size={16} />}
           </button>
           <button onClick={onClose}>
