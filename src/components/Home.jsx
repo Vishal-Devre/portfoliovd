@@ -525,7 +525,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
           </div>
           <div className="scroll-indicator">
             <div className="scroll-down"></div>
-            <span>Scroll Down</span>
+            <span>Scroll</span>
           </div>
         </section>
 
