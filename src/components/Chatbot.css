@@ -255,6 +255,10 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .buttonminimise {
+    display: none;
+    visibility: hidden;
+  }
   .chatbot-container {
     width: 95%;
     right: 2.5%;
