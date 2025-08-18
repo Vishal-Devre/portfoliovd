@@ -484,7 +484,7 @@
 /* Adjust for mobile if needed */
 @media (max-width: 768px) {
   .scroll-indicator {
-    bottom: 20px;
+    bottom: -5px;
   }
 }
 
