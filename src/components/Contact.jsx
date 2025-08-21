@@ -42,10 +42,16 @@ const validateEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
 
+const validatePhone = (phone) => {
+    // Basic phone validation - allows numbers, +, -, spaces, and parentheses
+    return /^[+]?[\s0-9\-\(\)]*$/.test(phone);
+};
+
 const Contact = ({ darkMode, toggleDarkMode }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        phone: '',
         message: ''
     });
     const [submitted, setSubmitted] = useState(false);
@@ -61,8 +67,6 @@ const Contact = ({ darkMode, toggleDarkMode }) => {
         initializeAOS();
     }, []);
 
-    // ... (rest of your existing useEffect hooks and other code remains the same)
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -77,8 +81,13 @@ const Contact = ({ darkMode, toggleDarkMode }) => {
             return;
         }
 
+        if (formData.phone && !validatePhone(formData.phone)) {
+            setError('Please enter a valid phone number');
+            return;
+        }
+
         if (!formData.name || !formData.message) {
-            setError('Please fill in all fields');
+            setError('Please fill in all required fields');
             return;
         }
 
@@ -95,7 +104,7 @@ const Contact = ({ darkMode, toggleDarkMode }) => {
             if (response.status === 200) {
                 setSubmitStatus('success');
                 setSubmitted(true);
-                setFormData({ name: '', email: '', message: '' });
+                setFormData({ name: '', email: '', phone: '', message: '' });
             } else {
                 throw new Error('Email delivery failed');
             }
@@ -241,6 +250,15 @@ const Contact = ({ darkMode, toggleDarkMode }) => {
                                                 value={formData.email}
                                                 onChange={handleChange}
                                                 required
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                placeholder="+91 000-000-00"
+                                                value={formData.phone}
+                                                onChange={handleChange}
                                             />
                                         </div>
                                         <div className="form-group">
