@@ -98,7 +98,12 @@ const Contact = ({ darkMode, toggleDarkMode }) => {
             const response = await emailjs.send(
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
                 import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                formData
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    from_phone: formData.phone,
+                    message: formData.message
+                }
             );
 
             if (response.status === 200) {
@@ -256,7 +261,7 @@ const Contact = ({ darkMode, toggleDarkMode }) => {
                                             <input
                                                 type="tel"
                                                 name="phone"
-                                                placeholder="+91 000-000-00"
+                                                placeholder="Your Phone Number"
                                                 value={formData.phone}
                                                 onChange={handleChange}
                                             />
