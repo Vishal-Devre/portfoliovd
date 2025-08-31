@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "yes",
-=======
   "name": "portfolio",
->>>>>>> 8ff6801c31ade3ba6afc09b98330c56d6266cda3
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -37,7 +33,6 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
     "vite": "^6.3.5"
-<<<<<<< HEAD
   },
   "description": "A modern, responsive showcase of my frontend skills.",
   "main": "eslint.config.js",
@@ -51,7 +46,4 @@
     "url": "https://github.com/Vishal-Devre/portfoliovd/issues"
   },
   "homepage": "https://github.com/Vishal-Devre/portfoliovd#readme"
-=======
-  }
->>>>>>> 8ff6801c31ade3ba6afc09b98330c56d6266cda3
 }
