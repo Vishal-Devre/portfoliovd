@@ -14,6 +14,10 @@ function App() {
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8ff6801c31ade3ba6afc09b98330c56d6266cda3
   const [showIntro, setShowIntro] = useState(() => {
     return !sessionStorage.getItem('introShown');
   });
