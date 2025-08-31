@@ -1,0 +1,54 @@
+/* Olive Theme*/
+.theme3 {
+    --masking: linear-gradient(to top, #00000000 2%, #000000 30%);
+    --body-bg: linear-gradient(135deg, #ffffff 0%, #dde8cb 100%);
+    --logo: invert(1);
+    --link: #000000;
+    --nav-bg: #00000005;
+    --main-heading: #416700;
+    --secondary-heading: #6b8e23;
+    --text-color: #2a3300;
+    --text-fade: #5a6842;
+    --color: #141f00;
+    --secondary-color: #1d2708;
+    --primary-color: #1b2900;
+    --btn-bg: radial-gradient(circle farthest-corner at -5.6% -6.8%, #6b8e23 37.3%, #81a828 73.5%);
+    --btn-bg-hover: radial-gradient(circle farthest-corner at -5.6% -6.8%, #7d9e2f 37.3%, #9cbb52 73.5%);
+    --btn-color: #ffffff;
+    --shadow-color: #3a4a1c64;
+    --card-bg: rgb(255, 255, 255);
+    --skill-bg: #6b8e2318;
+    --skill-progress: #8a9d5c;
+    --minicard-bg: #ffffff;
+    --border-b: #a2b580;
+    --icon-color: #f0f5e6;
+    --contact-icons-bg: linear-gradient(135deg, #4a5c24 0%, #b5c99a 100%);
+    --contact-input-bg: #e8efdb;
+}
+
+.theme3.dark {
+    --contact-input-bg: #3a4a1c;
+    --masking: linear-gradient(to top, #00000000 2%, #000000 30%);
+    --body-bg: linear-gradient(135deg, #0f1306 0%, #252e12 100%);
+    --logo: invert(0);
+    --link: #f1f7e8;
+    --nav-bg: #00000005;
+    --main-heading: #d0ff92;
+    --text-color: #e1e8d6;
+    --text-fade: #b8c2a6;
+    --color: #f5f9eb;
+    --secondary-color: #ffffff;
+    --primary-color: #f7ffeb;
+    --secondary-heading: #b8dc7b;
+    --btn-bg: radial-gradient(circle farthest-corner at -5.6% -6.8%, #556b2f 37.3%, #667e3d 73.5%);
+    --btn-bg-hover: radial-gradient(circle farthest-corner at -5.6% -6.8%, #667e3d 37.3%, #556b2f 73.5%);
+    --btn-color: #ffffff;
+    --shadow-color: #1a1f0f5a;
+    --card-bg: rgb(17, 23, 2);
+    --skill-bg: #a2b58018;
+    --skill-progress: #8a9d5c;
+    --minicard-bg: #556b2f1a;
+    --border-b: #6b8e23;
+    --icon-color: #252e12;
+    --contact-icons-bg: linear-gradient(135deg, #8a9d5c 0%, #e8efdb 100%);
+}
