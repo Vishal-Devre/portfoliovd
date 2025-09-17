@@ -7,7 +7,6 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Intro from './components/Intro';
 import './App.css';
-// import 'fonts/font.css';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
