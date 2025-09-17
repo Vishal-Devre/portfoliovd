@@ -1,0 +1,57 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "server": "node server/index.js",
+    "dev-with-server": "concurrently \"npm run server\" \"vite\""
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@gsap/react": "^2.1.2",
+    "@tsparticles/all": "^3.8.1",
+    "@tsparticles/react": "^3.0.0",
+    "@types/gsap": "^3.0.0",
+    "aos": "^2.3.4",
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "gsap": "^3.13.0",
+    "openai": "^4.104.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.5.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "esbuild": "^0.21.5",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "rollup": "^4.21.0",
+    "vite": "^6.3.5"
+  },
+  "description": "A modern, responsive showcase of my frontend skills.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vishal-Devre/portfoliovd.git"
+  },
+  "author": "vishal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vishal-Devre/portfoliovd/issues"
+  },
+  "homepage": "https://github.com/Vishal-Devre/portfoliovd#readme"
+}

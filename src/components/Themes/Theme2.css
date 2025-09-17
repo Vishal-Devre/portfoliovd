@@ -1,0 +1,54 @@
+/* Coffee theme */
+.theme2 {
+    --masking: linear-gradient(to top, #00000000 2%, #000000 30%);
+    --body-bg: linear-gradient(135deg, #ffffff 0%, #ffe8d1 100%);
+    --logo: invert(1);
+    --link: #270a00;
+    --nav-bg: #00000005;
+    --main-heading: #8e2001;
+    --secondary-heading: #a83800;
+    --text-color: #000000;
+    --text-fade: #5e463c;
+    --color: #180500;
+    --secondary-color: #431a00;
+    --primary-color: #260900;
+    --btn-bg: radial-gradient(circle farthest-corner at -5.6% -6.8%, rgb(214, 148, 82) 37.3%, #ffc994 73.5%);
+    --btn-bg-hover: radial-gradient(circle farthest-corner at -5.6% -6.8%, rgb(243, 149, 95) 37.3%, #e07036 73.5%);
+    --btn-color: #ffffff;
+    --shadow-color: #42210064;
+    --card-bg: #ffffff;
+    --skill-bg: #9a4e1b18;
+    --skill-progress: #ca7d52;
+    --minicard-bg: #f7faff;
+    --border-b: #ffa488;
+    --icon-color: #ffead6;
+    --contact-icons-bg: linear-gradient(135deg, #5c2300 0%, #ff9e5e 100%);
+    --contact-input-bg: #ffebde;
+}
+
+.theme2.dark {
+    --contact-input-bg: #8c4314;
+    --masking: linear-gradient(to top, #00000000 2%, #000000 30%);
+    --body-bg: linear-gradient(135deg, rgb(22, 9, 0) 0%, rgb(115, 47, 21) 100%);
+    --logo: invert(0);
+    --link: #fff4eb;
+    --nav-bg: #00000005;
+    --main-heading: #ff763d;
+    --text-color: #fff5e5;
+    --text-fade: #e8c2ae;
+    --color: #fff7ed;
+    --secondary-color: #ffffff;
+    --primary-color: #e7d1be;
+    --secondary-heading: #c87e68;
+    --btn-bg: radial-gradient(circle farthest-corner at -5.6% -6.8%, #e07036 37.3%, #f3955f 73.5%);
+    --btn-bg-hover: radial-gradient(circle farthest-corner at -5.6% -6.8%, rgb(243, 149, 95) 37.3%, #e07036 73.5%);
+    --btn-color: #ffffff;
+    --shadow-color: #1f1f1f5a;
+    --card-bg: #240900;
+    --skill-bg: #ffb38818;
+    --skill-progress: #e07036;
+    --minicard-bg: #c27e571a;
+    --border-b: #ffb388;
+    --icon-color: #6b1a00;
+    --contact-icons-bg: linear-gradient(135deg, #f28a5a 0%, #ffebdb 100%);
+}

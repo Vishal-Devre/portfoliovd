@@ -1,0 +1,402 @@
+/* Base Styles */
+/* font  */
+.hero-description,
+.hero-subtitle,
+.bio-item,
+.about-section-card p {
+  font-family: 'Russolo' !important;
+
+}
+
+.about-section {
+  padding: 80px 20px;
+  min-height: 100vh;
+  font-family: 'Antique-Olive';
+  background: var(--body-bg);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wave {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(15deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+/* Applied Animations */
+.fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.wave {
+  display: inline-block;
+  animation: wave 2s infinite;
+}
+
+/* Hero Section */
+.about-hero-parent {
+  margin: 50px auto 0 auto;
+}
+
+.about-hero {
+  gap: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  min-height: 60vh;
+}
+
+.about-hero-text {
+  flex: 1;
+  min-width: 50%;
+
+}
+
+.about-image-container {
+  flex: 1;
+  min-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-wrapper {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+  mask: var(--masking);
+
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.03);
+}
+
+.hero-title {
+  font-size: 120px;
+  margin-bottom: 20px;
+  color: var(--main-heading);
+}
+
+.btn-primary {
+  background: var(--btn-bg);
+}
+
+.hero-subtitle {
+  text-align: justify;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  line-height: 1.3;
+}
+
+.highlight {
+  color: var(--secondary-heading);
+  font-weight: 600;
+}
+
+.hero-description p {
+  opacity: 0.6;
+  text-align: justify;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-fade);
+  margin-bottom: 15px;
+}
+
+/* Section Cards */
+.about-section-card {
+  padding: 30px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  color: var(--text-color);
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.about-section-card {
+  background: var(--card-bg);
+  box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--border-b);
+}
+
+/* Who I Am Section */
+.bio-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.bio-item h3 {
+  color: var(--text-color);
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.bio-item p {
+  color: var(--text-fade);
+}
+
+/* Stats Section */
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stats-item {
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--minicard-bg);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.stats-item:hover {
+  transform: scale(1.05);
+}
+
+.stats-item h3 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+.stats-item p {
+  color: var(--color);
+}
+
+/* Skills Section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.skill-item {
+  padding: 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.skill-item {
+  color: var(--link);
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+}
+
+.skill-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--skill-bg);
+  border-radius: 4px;
+  margin: 10px 0 5px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  background: var(--skill-progress);
+  border-radius: 4px;
+  transition: width 1s ease-out;
+}
+
+.skill-level {
+  font-size: 0.9rem;
+  color: var(--text-fade);
+  opacity: 0.8;
+}
+
+/* Resume Section Specific Styles */
+.resume-section {
+  opacity: 1 !important;
+  /* Override any animation opacity issues */
+}
+
+.resume-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border-radius: 50px;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.resume-button:hover {
+  background: var(--btn-bg-hover);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the section is visible */
+.fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 1;
+  /* Add this to ensure visibility */
+}
+
+/* Contact Section */
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.social-links {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  color: var(--secondary-heading);
+}
+
+.social-icon:hover {
+  color: var(--btn-bg);
+  transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .about-hero {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .about-hero-text,
+  .about-image-container {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .image-wrapper {
+    /* display: none; */
+    max-width: 350px;
+    margin-top: 30px;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 60px 15px;
+  }
+
+  .bio-details,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .stats-section {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}

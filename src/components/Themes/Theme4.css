@@ -1,0 +1,54 @@
+/* Aqua & Jungle Green Theme */
+.theme4 {
+    --masking: linear-gradient(to top, #00000000 2%, #000000 30%);
+    --body-bg: linear-gradient(135deg, #ffffff 0%, #e0f7fa 100%);
+    --logo: invert(1);
+    --link: #001a1b;
+    --nav-bg: #00000009;
+    --main-heading: #00bbcd;
+    --secondary-heading: #005864;
+    --text-color: #00363a;
+    --text-fade: #265d63;
+    --color: #00272b;
+    --secondary-color: #001512;
+    --primary-color: #00292b;
+    --btn-bg: radial-gradient(circle farthest-corner at -5.6% -6.8%, #00acc1 37.3%, #68cddb 73.5%);
+    --btn-bg-hover: radial-gradient(circle farthest-corner at -5.6% -6.8%, rgb(0, 150, 171) 37.3%, #80deea 73.5%);
+    --btn-color: #ffffff;
+    --shadow-color: #00606464;
+    --card-bg: rgb(255, 255, 255);
+    --skill-bg: #00acc118;
+    --skill-progress: #4dd0e1;
+    --minicard-bg: #ffffff;
+    --border-b: #80deea;
+    --icon-color: #e0f7fa;
+    --contact-icons-bg: linear-gradient(135deg, #006064 0%, #b2ebf2 100%);
+    --contact-input-bg: #e0f7fa;
+}
+
+.theme4.dark {
+    --contact-input-bg: #1a3c40;
+    --masking: linear-gradient(to top, #00000000 2%, #000000 30%);
+    --body-bg: linear-gradient(135deg, #0d1f1f 0%, #1a3c40 100%);
+    --logo: invert(0);
+    --link: #e0f7fa;
+    --nav-bg: #00000005;
+    --main-heading: #4dd0e1;
+    --text-color: #e0f7fa;
+    --text-fade: #b2ebf2;
+    --color: #f0fdff;
+    --secondary-color: #ffffff;
+    --primary-color: #b2ebf2;
+    --secondary-heading: #80deea;
+    --btn-bg: radial-gradient(circle farthest-corner at -5.6% -6.8%, #006064 37.3%, #00838f 73.5%);
+    --btn-bg-hover: radial-gradient(circle farthest-corner at -5.6% -6.8%, rgb(0, 112, 119) 37.3%, #006064 73.5%);
+    --btn-color: #ffffff;
+    --shadow-color: #0d1f1f5a;
+    --card-bg: rgb(13, 31, 31);
+    --skill-bg: #80deea18;
+    --skill-progress: #4dd0e1;
+    --minicard-bg: #0060641a;
+    --border-b: #00838f;
+    --icon-color: #1a3c40;
+    --contact-icons-bg: linear-gradient(135deg, #00838f 0%, #b2ebf2 100%);
+}
