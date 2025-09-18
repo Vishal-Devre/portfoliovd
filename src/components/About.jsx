@@ -148,7 +148,7 @@ const About = ({ darkMode, toggleDarkMode }) => {
             <div className="bio-details">
               <div className="bio-item">
                 <h3>Name</h3>
-                <p>Vishal Devre</p>
+                <p>VISHAL DEVRE</p>
               </div>
               <div className="bio-item">
                 <h3>Education</h3>
@@ -243,5 +243,4 @@ const About = ({ darkMode, toggleDarkMode }) => {
     </div>
   );
 };
-
 export default About;
