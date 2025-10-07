@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MdClose, MdKeyboardArrowUp, MdRemove } from "react-icons/md";
 import "./Chatbot.css";
+import Navbar from "./Navbar";
 
 const Chatbot = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
@@ -15,12 +16,6 @@ const Chatbot = ({ isOpen, onClose }) => {
   const [quickQuestions, setQuickQuestions] = useState([]);
 
   const messagesEndRef = useRef(null);
-
-  // ✅ Add development mode toggle
-  const [isDevMode, setIsDevMode] = useState(false);
-  const BACKEND_URL = isDevMode
-    ? "http://localhost:8080/api/chat" // Local development
-    : "https://portfoliovd-production.up.railway.app/api/chat"; // Production
 
   // Big pool of predefined questions
   const allQuestions = [
@@ -74,8 +69,7 @@ const Chatbot = ({ isOpen, onClose }) => {
         messages: [
           {
             role: "system",
-            content:
-              "You are a helpful portfolio assistant. Answer questions about Vishal Devre's portfolio, skills, projects, and experience. Keep responses concise and helpful.",
+            content: "You are a helpful portfolio assistant...",
           },
           ...updatedMessages.slice(-4).map((msg) => ({
             role: msg.sender === "bot" ? "assistant" : "user",
@@ -84,8 +78,11 @@ const Chatbot = ({ isOpen, onClose }) => {
         ],
       };
 
-      console.log("📤 Sending to:", BACKEND_URL);
-      console.log("Mode:", isDevMode ? "DEV" : "PROD");
+      // For local testing - use this during development
+      // const BACKEND_URL = "http://localhost:8080/api/chat";
+
+      // For production - use this after Railway deployment
+      const BACKEND_URL = "https://portfoliovd-production.up.railway.app/";
 
       const response = await fetch(BACKEND_URL, {
         method: "POST",
@@ -93,15 +90,11 @@ const Chatbot = ({ isOpen, onClose }) => {
         body: JSON.stringify(payload),
       });
 
-      console.log("📥 Response status:", response.status);
-
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Server error: ${response.status} - ${errorText}`);
+        throw new Error(`Server error: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("✅ Response data:", data);
 
       if (!data.choices || !data.choices[0]) {
         throw new Error("Invalid API response format");
@@ -110,11 +103,11 @@ const Chatbot = ({ isOpen, onClose }) => {
       const botMessage = data.choices[0].message.content;
       setMessages((prev) => [...prev, { text: botMessage, sender: "bot" }]);
     } catch (error) {
-      console.error("❌ Chat Error:", error);
+      console.error("Chat Error:", error);
       setMessages((prev) => [
         ...prev,
         {
-          text: `Sorry, I'm having trouble. ${error.message}`,
+          text: "Sorry, I'm having trouble responding right now.",
           sender: "bot",
         },
       ]);
@@ -130,23 +123,8 @@ const Chatbot = ({ isOpen, onClose }) => {
       }`}
     >
       <div className="chatbot-header">
-        <h3>Portfolio Assistant {isDevMode ? "(DEV)" : "(PROD)"}</h3>
+        <h3>Portfolio Assistant</h3>
         <div className="chatbot-actions">
-          {/* Dev mode toggle */}
-          <button
-            onClick={() => setIsDevMode(!isDevMode)}
-            style={{
-              background: isDevMode ? "#ff4444" : "#28a745",
-              color: "white",
-              border: "none",
-              padding: "4px 8px",
-              borderRadius: "4px",
-              fontSize: "10px",
-              marginRight: "8px",
-            }}
-          >
-            {isDevMode ? "DEV" : "PROD"}
-          </button>
           <button
             className="buttonminimise"
             onClick={() => setIsMinimized(!isMinimized)}
@@ -165,7 +143,7 @@ const Chatbot = ({ isOpen, onClose }) => {
 
       {!isMinimized && (
         <>
-          {/* Quick Questions Section */}
+          {/* Quick Questions Section - Only show when it's the first message */}
           {messages.length === 1 && (
             <div className="quick-questions">
               <p>Quick questions:</p>

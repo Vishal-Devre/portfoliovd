@@ -7,40 +7,24 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-
-// ✅ FIX: Allow your actual Vercel domain
-app.use(cors({
-  origin: [
-    "https://portfoliovd-five.vercel.app",  // Your production frontend
-    "http://localhost:5173",                // Local development
-    "http://localhost:3000"                 // Alternative local
-  ],
-  credentials: true,
-  methods: ["GET", "POST", "OPTIONS"]
-}));
-
 app.use(express.json());
+app.use(cors());
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
-// Health check
+// ✅ ADD THIS: Health check route (REQUIRED for Railway)
 app.get("/", (req, res) => {
-  res.json({ 
-    message: "Portfolio Chatbot API is running!",
-    frontend: "https://portfoliovd-five.vercel.app"
-  });
+  res.json({ message: "Portfolio Chatbot API is running!" });
 });
 
 app.post("/api/chat", async (req, res) => {
   try {
-    console.log("📨 Chat request from:", req.headers.origin);
-    
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://portfoliovd-five.vercel.app/", // ✅ Your actual domain
+        "HTTP-Referer": "https://portfoliovd-five.vercel.app/",
         "X-Title": "Portfolio Chatbot"
       },
       body: JSON.stringify({
@@ -57,5 +41,6 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
+// ✅ FIX THIS: Use environment port for Railway
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
