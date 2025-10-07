@@ -18,8 +18,8 @@ const Chatbot = ({ isOpen, onClose }) => {
 
   // ✅ Add development mode toggle
   const [isDevMode, setIsDevMode] = useState(false);
-  const BACKEND_URL = isDevMode 
-    ? "http://localhost:8080/api/chat"  // Local development
+  const BACKEND_URL = isDevMode
+    ? "http://localhost:8080/api/chat" // Local development
     : "https://portfoliovd-production.up.railway.app/api/chat"; // Production
 
   // Big pool of predefined questions
@@ -74,7 +74,8 @@ const Chatbot = ({ isOpen, onClose }) => {
         messages: [
           {
             role: "system",
-            content: "You are a helpful portfolio assistant. Answer questions about Vishal Devre's portfolio, skills, projects, and experience. Keep responses concise and helpful.",
+            content:
+              "You are a helpful portfolio assistant. Answer questions about Vishal Devre's portfolio, skills, projects, and experience. Keep responses concise and helpful.",
           },
           ...updatedMessages.slice(-4).map((msg) => ({
             role: msg.sender === "bot" ? "assistant" : "user",
@@ -88,10 +89,7 @@ const Chatbot = ({ isOpen, onClose }) => {
 
       const response = await fetch(BACKEND_URL, {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-        },
-        mode: "cors",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
@@ -137,17 +135,17 @@ const Chatbot = ({ isOpen, onClose }) => {
           {/* Dev mode toggle */}
           <button
             onClick={() => setIsDevMode(!isDevMode)}
-            style={{ 
-              background: isDevMode ? '#ff4444' : '#28a745',
-              color: 'white',
-              border: 'none',
-              padding: '4px 8px',
-              borderRadius: '4px',
-              fontSize: '10px',
-              marginRight: '8px'
+            style={{
+              background: isDevMode ? "#ff4444" : "#28a745",
+              color: "white",
+              border: "none",
+              padding: "4px 8px",
+              borderRadius: "4px",
+              fontSize: "10px",
+              marginRight: "8px",
             }}
           >
-            {isDevMode ? 'DEV' : 'PROD'}
+            {isDevMode ? "DEV" : "PROD"}
           </button>
           <button
             className="buttonminimise"

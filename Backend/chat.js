@@ -8,76 +8,39 @@ dotenv.config();
 
 const app = express();
 
-// ✅ FIXED: Comprehensive CORS configuration
+// ✅ FIX: Allow your actual Vercel domain
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    const allowedOrigins = [
-      "http://localhost:5173",
-      "http://localhost:3000", 
-      "https://vishal-devre.vercel.app",
-      "https://your-portfolio.vercel.app"
-    ];
-    
-    if (allowedOrigins.indexOf(origin) !== -1 || origin.includes("railway")) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: [
+    "https://portfoliovd-five.vercel.app",  // Your production frontend
+    "http://localhost:5173",                // Local development
+    "http://localhost:3000"                 // Alternative local
+  ],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
+  methods: ["GET", "POST", "OPTIONS"]
 }));
-
-// ✅ Handle preflight requests globally
-app.options('*', cors());
 
 app.use(express.json());
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
-// Health check route
+// Health check
 app.get("/", (req, res) => {
   res.json({ 
     message: "Portfolio Chatbot API is running!",
-    status: "healthy",
-    timestamp: new Date().toISOString()
-  });
-});
-
-// Test route for CORS
-app.get("/api/test", (req, res) => {
-  res.json({ 
-    message: "CORS test successful!",
-    origin: req.headers.origin,
-    method: "GET"
+    frontend: "https://portfoliovd-five.vercel.app"
   });
 });
 
 app.post("/api/chat", async (req, res) => {
   try {
-    console.log("📨 Received POST request to /api/chat");
-    console.log("Origin:", req.headers.origin);
-    console.log("Body:", JSON.stringify(req.body, null, 2));
-
-    // ✅ Add CORS headers to response
-    res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-    if (!req.body.messages) {
-      return res.status(400).json({ error: "Messages are required" });
-    }
-
+    console.log("📨 Chat request from:", req.headers.origin);
+    
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://vishal-devre.vercel.app/",
+        "HTTP-Referer": "https://portfoliovd-five.vercel.app/", // ✅ Your actual domain
         "X-Title": "Portfolio Chatbot"
       },
       body: JSON.stringify({
@@ -86,34 +49,13 @@ app.post("/api/chat", async (req, res) => {
       }),
     });
 
-    if (!response.ok) {
-      throw new Error(`OpenRouter API error: ${response.status}`);
-    }
-
     const data = await response.json();
-    console.log("✅ OpenRouter response received");
-    
     res.json(data);
   } catch (error) {
-    console.error("❌ Server error:", error);
-    res.status(500).json({ 
-      error: "Internal server error",
-      details: error.message 
-    });
+    console.error("Server error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// ✅ Specific OPTIONS handler for /api/chat
-app.options("/api/chat", (req, res) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
-  res.status(200).send();
-});
-
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-  console.log(`📍 Health check: http://localhost:${PORT}/`);
-  console.log(`📍 Test endpoint: http://localhost:${PORT}/api/test`);
-});
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
