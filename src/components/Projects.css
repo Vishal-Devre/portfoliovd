@@ -3,11 +3,11 @@
 .project-description-text p,
 .project-description,
 .popup-content p {
-  font-family: 'Russolo' !important;
+  font-family: "Russolo" !important;
 }
 
 .projects-section {
-  font-family: 'Antique-Olive';
+  font-family: "Antique-Olive";
   padding: 4rem 2rem;
   background: var(--body-bg);
   min-height: 100vh;
@@ -115,7 +115,7 @@
   position: absolute;
   background: var(--btn-bg);
   border: none;
-  opacity: .8;
+  opacity: 0.8;
   color: var(--btn-color);
   border-radius: 50%;
   width: 40px;
@@ -278,7 +278,7 @@
 }
 
 .close-btn {
-  position: absolute;
+  position: fixed;
   top: 1rem;
   right: 1rem;
   background: none;
@@ -290,7 +290,7 @@
 
 .popup-content img {
   width: 100%;
-  max-height: 300px;
+  max-height: 100%;
   object-fit: cover;
   border-radius: 5px;
   margin: 1rem 0;
@@ -393,7 +393,6 @@
 }
 
 @keyframes blink {
-
   0%,
   100% {
     opacity: 1;
@@ -411,4 +410,64 @@
 
 .project-row:nth-child(even) .project-description-text {
   transform: translateX(50px);
+}
+
+/* Achievements Button Section */
+.achievements-section {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.achievements-section {
+  background: var(--body-bg);
+}
+
+.achievements-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.achievements-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 2.5rem;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark Mode Button */
+.achievements-btn {
+  background: var(--btn-bg);
+  color: var(--color);
+}
+
+/* Hover Effects */
+.achievements-btn:hover {
+  transform: translateY(-3px);
+  gap: 1.25rem;
+}
+
+.achievements-btn.light:hover {
+  background: var(--btn-bg);
+  color: var(--color);
+}
+
+/* Trophy Icon */
+.trophy-icon {
+  font-size: 1.5rem;
+  transition: transform 0.4s ease;
+}
+
+.achievements-btn:hover .trophy-icon {
+  transform: scale(1.2) rotate(15deg);
 }

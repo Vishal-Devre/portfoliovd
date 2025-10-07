@@ -94,10 +94,10 @@ const Home = ({ darkMode, toggleDarkMode }) => {
   const images = [
     "/images/homeimage.jpg",
     "/images/changeimg2.jpg",
-    "/images/changeimg3.jpg",
+    "/images/changeimg6.png",
     "/images/changeimg4.jpg",
     "/images/changeimg5.jpg",
-    "/images/changeimg6.jpg",
+    "/images/changeimg3.jpg",
   ];
 
   // Auto-rotate images every 8 seconds

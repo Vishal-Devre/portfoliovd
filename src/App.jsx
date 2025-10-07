@@ -6,6 +6,7 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Intro from './components/Intro';
+import Achievements from './components/Achievements';
 import './App.css';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
               <Route path="/about" element={<About darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
               <Route path="/projects" element={<Projects darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
               <Route path="/contact" element={<Contact darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
+              <Route path="/achievements" element={<Achievements darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
             </Routes>
           </>
         )}

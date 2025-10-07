@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MdClose, MdKeyboardArrowUp, MdRemove } from "react-icons/md";
 import "./Chatbot.css";
+import Navbar from "./Navbar";
 
 const Chatbot = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
@@ -12,8 +13,33 @@ const Chatbot = ({ isOpen, onClose }) => {
   const [inputValue, setInputValue] = useState("");
   const [isMinimized, setIsMinimized] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [quickQuestions, setQuickQuestions] = useState([]);
+
   const messagesEndRef = useRef(null);
+
+  // Big pool of predefined questions
+  const allQuestions = [
+    "Where do you live?",
+    "Tell me about your projects",
+    "What skills do you have?",
+    "How can I contact you?",
+    "What is your education background?",
+    "Do you have any experience with AI?",
+    "What is your favorite project?",
+    "Tell me about your portfolio website",
+    "Which technologies do you use?",
+    "How did you learn programming?",
+    "What are your hobbies?",
+    "What motivates you?",
+    "Do you have social media links?",
+    "Can I collaborate with you?",
+  ];
+
+  // On component mount, pick 3–4 random questions
+  useEffect(() => {
+    const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
+    setQuickQuestions(shuffled.slice(0, 4));
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -23,10 +49,16 @@ const Chatbot = ({ isOpen, onClose }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleSendMessage = async () => {
-    if (inputValue.trim() === "" || isLoading) return;
+  const handleQuickQuestionClick = (question) => {
+    setInputValue(question);
+    handleSendMessage(question);
+  };
 
-    const userMessage = { text: inputValue, sender: "user" };
+  const handleSendMessage = async (overrideMessage) => {
+    const messageToSend = overrideMessage ?? inputValue;
+    if (messageToSend.trim() === "" || isLoading) return;
+
+    const userMessage = { text: messageToSend, sender: "user" };
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
     setInputValue("");
@@ -35,7 +67,10 @@ const Chatbot = ({ isOpen, onClose }) => {
     try {
       const payload = {
         messages: [
-          { role: "system", content: "You are a helpful portfolio assistant..." },
+          {
+            role: "system",
+            content: "You are a helpful portfolio assistant...",
+          },
           ...updatedMessages.slice(-4).map((msg) => ({
             role: msg.sender === "bot" ? "assistant" : "user",
             content: msg.text,
@@ -43,7 +78,13 @@ const Chatbot = ({ isOpen, onClose }) => {
         ],
       };
 
-      const response = await fetch("http://localhost:5173/api/chat", {
+      // For local testing - use this during development
+      const BACKEND_URL = "http://localhost:8080/api/chat";
+
+      // For production - use this after Railway deployment
+      // const BACKEND_URL = "https://your-backend-name.up.railway.app/api/chat";
+
+      const response = await fetch(BACKEND_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -65,7 +106,10 @@ const Chatbot = ({ isOpen, onClose }) => {
       console.error("Chat Error:", error);
       setMessages((prev) => [
         ...prev,
-        { text: "Sorry, I'm having trouble responding right now.", sender: "bot" },
+        {
+          text: "Sorry, I'm having trouble responding right now.",
+          sender: "bot",
+        },
       ]);
     } finally {
       setIsLoading(false);
@@ -81,8 +125,15 @@ const Chatbot = ({ isOpen, onClose }) => {
       <div className="chatbot-header">
         <h3>Portfolio Assistant</h3>
         <div className="chatbot-actions">
-          <button className="buttonminimise" onClick={() => setIsMinimized(!isMinimized)}>
-            {isMinimized ? <MdKeyboardArrowUp size={16} /> : <MdRemove size={16} />}
+          <button
+            className="buttonminimise"
+            onClick={() => setIsMinimized(!isMinimized)}
+          >
+            {isMinimized ? (
+              <MdKeyboardArrowUp size={16} />
+            ) : (
+              <MdRemove size={16} />
+            )}
           </button>
           <button onClick={onClose}>
             <MdClose size={16} />
@@ -92,6 +143,25 @@ const Chatbot = ({ isOpen, onClose }) => {
 
       {!isMinimized && (
         <>
+          {/* Quick Questions Section - Only show when it's the first message */}
+          {messages.length === 1 && (
+            <div className="quick-questions">
+              <p>Quick questions:</p>
+              <div className="quick-questions-grid">
+                {quickQuestions.map((question, index) => (
+                  <button
+                    key={index}
+                    className="quick-question-btn"
+                    onClick={() => handleQuickQuestionClick(question)}
+                    disabled={isLoading}
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="chatbot-messages">
             {messages.map((message, index) => (
               <div key={index} className={`message ${message.sender}`}>
@@ -119,7 +189,7 @@ const Chatbot = ({ isOpen, onClose }) => {
               onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
               disabled={isLoading}
             />
-            <button onClick={handleSendMessage} disabled={isLoading}>
+            <button onClick={() => handleSendMessage()} disabled={isLoading}>
               Send
             </button>
           </div>
