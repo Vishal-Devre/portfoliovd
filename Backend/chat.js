@@ -12,7 +12,7 @@ app.use(cors());
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
-// ✅ ADD THIS: Health check route (REQUIRED for Railway)
+//Health check route (REQUIRED for Railway)
 app.get("/", (req, res) => {
   res.json({ message: "Portfolio Chatbot API is running!" });
 });
@@ -24,7 +24,7 @@ app.post("/api/chat", async (req, res) => {
       headers: {
         "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://portfoliovd-five.vercel.app/",
+        "HTTP-Referer": "https://your-portfolio-site.com/",
         "X-Title": "Portfolio Chatbot"
       },
       body: JSON.stringify({
