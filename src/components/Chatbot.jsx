@@ -77,33 +77,42 @@ const Chatbot = ({ isOpen, onClose }) => {
         ],
       };
 
-      // ✅ FIXED: Correct URL with /api/chat endpoint
+      // ✅ FIXED: Correct URL and better error handling
       const BACKEND_URL = "https://portfoliovd-production.up.railway.app/api/chat";
+
+      console.log("📤 Sending request to:", BACKEND_URL);
+      console.log("Payload:", payload);
 
       const response = await fetch(BACKEND_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       });
 
+      console.log("📥 Response status:", response.status);
+
       if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`Server error: ${response.status} - ${errorText}`);
       }
 
       const data = await response.json();
+      console.log("✅ Response data:", data);
 
       if (!data.choices || !data.choices[0]) {
-        throw new Error("Invalid API response format");
+        throw new Error("Invalid API response format - no choices found");
       }
 
       const botMessage = data.choices[0].message.content;
       setMessages((prev) => [...prev, { text: botMessage, sender: "bot" }]);
     } catch (error) {
-      console.error("Chat Error:", error);
+      console.error("❌ Chat Error:", error);
       setMessages((prev) => [
         ...prev,
         {
-          text: "Sorry, I'm having trouble responding right now. Please try again later.",
+          text: `Sorry, I'm having trouble responding. Error: ${error.message}`,
           sender: "bot",
         },
       ]);
