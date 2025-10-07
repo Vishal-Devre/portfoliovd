@@ -16,6 +16,12 @@ const Chatbot = ({ isOpen, onClose }) => {
 
   const messagesEndRef = useRef(null);
 
+  // ✅ Add development mode toggle
+  const [isDevMode, setIsDevMode] = useState(false);
+  const BACKEND_URL = isDevMode 
+    ? "http://localhost:8080/api/chat"  // Local development
+    : "https://portfoliovd-production.up.railway.app/api/chat"; // Production
+
   // Big pool of predefined questions
   const allQuestions = [
     "Where do you live?",
@@ -77,17 +83,15 @@ const Chatbot = ({ isOpen, onClose }) => {
         ],
       };
 
-      // ✅ FIXED: Correct URL and better error handling
-      const BACKEND_URL = "https://portfoliovd-production.up.railway.app/api/chat";
-
-      console.log("📤 Sending request to:", BACKEND_URL);
-      console.log("Payload:", payload);
+      console.log("📤 Sending to:", BACKEND_URL);
+      console.log("Mode:", isDevMode ? "DEV" : "PROD");
 
       const response = await fetch(BACKEND_URL, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
         },
+        mode: "cors",
         body: JSON.stringify(payload),
       });
 
@@ -102,7 +106,7 @@ const Chatbot = ({ isOpen, onClose }) => {
       console.log("✅ Response data:", data);
 
       if (!data.choices || !data.choices[0]) {
-        throw new Error("Invalid API response format - no choices found");
+        throw new Error("Invalid API response format");
       }
 
       const botMessage = data.choices[0].message.content;
@@ -112,7 +116,7 @@ const Chatbot = ({ isOpen, onClose }) => {
       setMessages((prev) => [
         ...prev,
         {
-          text: `Sorry, I'm having trouble responding. Error: ${error.message}`,
+          text: `Sorry, I'm having trouble. ${error.message}`,
           sender: "bot",
         },
       ]);
@@ -128,8 +132,23 @@ const Chatbot = ({ isOpen, onClose }) => {
       }`}
     >
       <div className="chatbot-header">
-        <h3>Portfolio Assistant</h3>
+        <h3>Portfolio Assistant {isDevMode ? "(DEV)" : "(PROD)"}</h3>
         <div className="chatbot-actions">
+          {/* Dev mode toggle */}
+          <button
+            onClick={() => setIsDevMode(!isDevMode)}
+            style={{ 
+              background: isDevMode ? '#ff4444' : '#28a745',
+              color: 'white',
+              border: 'none',
+              padding: '4px 8px',
+              borderRadius: '4px',
+              fontSize: '10px',
+              marginRight: '8px'
+            }}
+          >
+            {isDevMode ? 'DEV' : 'PROD'}
+          </button>
           <button
             className="buttonminimise"
             onClick={() => setIsMinimized(!isMinimized)}
@@ -148,7 +167,7 @@ const Chatbot = ({ isOpen, onClose }) => {
 
       {!isMinimized && (
         <>
-          {/* Quick Questions Section - Only show when it's the first message */}
+          {/* Quick Questions Section */}
           {messages.length === 1 && (
             <div className="quick-questions">
               <p>Quick questions:</p>
