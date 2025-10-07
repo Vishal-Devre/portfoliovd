@@ -7,18 +7,26 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+
+// ✅ FIXED: Proper CORS configuration
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:3000"],
+  credentials: true
+}));
+
 app.use(express.json());
-app.use(cors());
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
-//Health check route (REQUIRED for Railway)
+// Health check route
 app.get("/", (req, res) => {
   res.json({ message: "Portfolio Chatbot API is running!" });
 });
 
 app.post("/api/chat", async (req, res) => {
   try {
+    console.log("Received request from:", req.headers.origin);
+    
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -41,6 +49,5 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-// ✅ FIX THIS: Use environment port for Railway
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MdClose, MdKeyboardArrowUp, MdRemove } from "react-icons/md";
 import "./Chatbot.css";
-import Navbar from "./Navbar";
 
 const Chatbot = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
@@ -69,7 +68,7 @@ const Chatbot = ({ isOpen, onClose }) => {
         messages: [
           {
             role: "system",
-            content: "You are a helpful portfolio assistant...",
+            content: "You are a helpful portfolio assistant. Answer questions about Vishal Devre's portfolio, skills, projects, and experience. Keep responses concise and helpful.",
           },
           ...updatedMessages.slice(-4).map((msg) => ({
             role: msg.sender === "bot" ? "assistant" : "user",
@@ -78,11 +77,8 @@ const Chatbot = ({ isOpen, onClose }) => {
         ],
       };
 
-      // For local testing - use this during development
-      const BACKEND_URL = "http://localhost:8080/api/chat";
-
-      // For production - use this after Railway deployment
-      // const BACKEND_URL = "https://your-backend-name.up.railway.app/api/chat";
+      // ✅ FIXED: Correct URL with /api/chat endpoint
+      const BACKEND_URL = "https://portfoliovd-production.up.railway.app/api/chat";
 
       const response = await fetch(BACKEND_URL, {
         method: "POST",
@@ -107,7 +103,7 @@ const Chatbot = ({ isOpen, onClose }) => {
       setMessages((prev) => [
         ...prev,
         {
-          text: "Sorry, I'm having trouble responding right now.",
+          text: "Sorry, I'm having trouble responding right now. Please try again later.",
           sender: "bot",
         },
       ]);
