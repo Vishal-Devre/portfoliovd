@@ -1,30 +1,54 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import fetch from "node-fetch";
 import cors from "cors";
 import dotenv from "dotenv";
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
+
+// ✅ CORS - SABSE PEHLE
+app.use(cors({
+  origin: "*", // TEMPORARY - sab allow karo
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
+
+// ✅ Pre-flight requests
+app.options("*", cors());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(express.json());
-app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-
-//Health check route (REQUIRED for Railway)
+// ✅ Health check
 app.get("/", (req, res) => {
-  res.json({ message: "Portfolio Chatbot API is running!" });
+  res.json({ 
+    message: "Portfolio Chatbot API is running!",
+    timestamp: new Date().toISOString()
+  });
 });
 
+// ✅ API route
 app.post("/api/chat", async (req, res) => {
+  // ✅ CORS headers manually bhi
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+  
   try {
+    console.log("Received chat request");
+    
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://your-portfolio-site.com/",
+        "HTTP-Referer": "https://portfoliovd-five.vercel.app/",
         "X-Title": "Portfolio Chatbot"
       },
       body: JSON.stringify({
@@ -33,14 +57,28 @@ app.post("/api/chat", async (req, res) => {
       }),
     });
 
+    if (!response.ok) {
+      throw new Error(`OpenRouter error: ${response.status}`);
+    }
+
     const data = await response.json();
     res.json(data);
   } catch (error) {
     console.error("Server error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ 
+      error: "Internal server error",
+      details: error.message 
+    });
   }
 });
 
-// ✅ FIX THIS: Use environment port for Railway
+// ✅ SPA routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`✅ CORS enabled for ALL origins`);
+});
