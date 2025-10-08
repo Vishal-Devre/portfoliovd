@@ -9,15 +9,20 @@ dotenv.config();
 
 const app = express();
 
-// ✅ CORS - SABSE PEHLE
+// ✅ CORS - SABSE PEHLE (BEFORE any other middleware)
 app.use(cors({
-  origin: "*", // TEMPORARY - sab allow karo
+  origin: "*", // All origins allow karo
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
-// ✅ Pre-flight requests
-app.options("*", cors());
+// ✅ Pre-flight requests handle karo
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+  res.sendStatus(200);
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,7 +40,7 @@ app.get("/", (req, res) => {
 
 // ✅ API route
 app.post("/api/chat", async (req, res) => {
-  // ✅ CORS headers manually bhi
+  // ✅ CORS headers manually bhi add karo
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
