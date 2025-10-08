@@ -79,11 +79,10 @@
   }
 }
 
-/* Chatbot Container Styles */
 /* Chatbot Container Positioning */
 .chatbot-container {
   position: fixed;
-  bottom: 100px;
+  bottom: 10px;
   right: 20px;
   width: 350px;
   height: 500px;
@@ -103,7 +102,7 @@
 
 .chatbot-container.minimized {
   height: 60px;
-  width: 60px;
+  width: auto;
   bottom: 20px;
   right: 20px;
 }
@@ -112,7 +111,7 @@
 .chatbot-toggle {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
   width: 60px;
   height: 60px;
   background: #007bff;
@@ -126,6 +125,12 @@
   color: white;
   border: none;
   transition: all 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+}
+.chatbot-container.open:not(.minimized) ~ .chatbot-toggle {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .chatbot-toggle:hover {
@@ -173,16 +178,23 @@
 }
 
 .chatbot-actions {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   display: flex;
   gap: 10px;
 }
 
 .chatbot-actions button {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
   background: none;
   border: none;
   color: white;
   cursor: pointer;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
   border-radius: 4px;
   transition: background 0.2s;
 }
@@ -309,12 +321,22 @@
   animation: typing 1.4s infinite ease-in-out;
 }
 
-.typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
-.typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
 
 @keyframes typing {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1); }
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
 }
 
 .chatbot-wrapper {
@@ -352,6 +374,7 @@
 .chatbot-header {
   display: flex;
   align-items: center;
+  gap: 10px;
   justify-content: space-between;
   padding: 16px 20px;
   background: var(
@@ -676,8 +699,9 @@
 
   .chatbot-container {
     width: auto;
+    bottom: 84px;
     height: 70vh;
-    max-height: 600px;
+    max-height: 650px;
   }
 
   .message-bubble {

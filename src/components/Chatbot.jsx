@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MdClose, MdKeyboardArrowUp, MdRemove } from "react-icons/md";
 import "./Chatbot.css";
-import Navbar from "./Navbar";
 
 const Chatbot = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
@@ -69,7 +68,8 @@ const Chatbot = ({ isOpen, onClose }) => {
         messages: [
           {
             role: "system",
-            content: "You are a helpful portfolio assistant...",
+            content:
+              "You are a helpful portfolio assistant for Vishal. Keep responses concise and helpful. Answer questions about Vishal's skills, projects, experience, and background.",
           },
           ...updatedMessages.slice(-4).map((msg) => ({
             role: msg.sender === "bot" ? "assistant" : "user",
@@ -78,23 +78,30 @@ const Chatbot = ({ isOpen, onClose }) => {
         ],
       };
 
-      // For local testing - use this during development
-      const BACKEND_URL = "http://localhost:8080/api/chat";
+      // ✅ Backend URL - Railway wala use karo
+      const BACKEND_URL =
+        "https://portfoliovd-production.up.railway.app/api/chat";
 
-      // For production - use this after Railway deployment
-      // const BACKEND_URL = "https://your-backend-name.up.railway.app/api/chat";
+      console.log("Sending request to:", BACKEND_URL);
 
       const response = await fetch(BACKEND_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       });
 
+      console.log("Response status:", response.status);
+
       if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
+        throw new Error(
+          `Server error: ${response.status} ${response.statusText}`
+        );
       }
 
       const data = await response.json();
+      console.log("API Response:", data);
 
       if (!data.choices || !data.choices[0]) {
         throw new Error("Invalid API response format");
@@ -107,7 +114,7 @@ const Chatbot = ({ isOpen, onClose }) => {
       setMessages((prev) => [
         ...prev,
         {
-          text: "Sorry, I'm having trouble responding right now.",
+          text: "Sorry, I'm having trouble responding right now. Please try again later.",
           sender: "bot",
         },
       ]);

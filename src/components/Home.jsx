@@ -46,10 +46,11 @@ const TechIcon = ({ icon, onClick }) => {
   );
 };
 
+// ChatbotToggle component ke andar yeh condition add karo
 const ChatbotToggle = ({ isOpen, onClick }) => {
   return (
     <div
-      className="chatbot-toggle"
+      className={`chatbot-toggle ${isOpen ? 'chat-open' : ''}`}
       onClick={onClick}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
