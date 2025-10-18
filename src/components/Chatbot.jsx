@@ -53,75 +53,69 @@ const Chatbot = ({ isOpen, onClose }) => {
     handleSendMessage(question);
   };
 
-  const handleSendMessage = async (overrideMessage) => {
-    const messageToSend = overrideMessage ?? inputValue;
-    if (messageToSend.trim() === "" || isLoading) return;
+ const handleSendMessage = async (overrideMessage) => {
+  const messageToSend = overrideMessage ?? inputValue;
+  if (messageToSend.trim() === "" || isLoading) return;
 
-    const userMessage = { text: messageToSend, sender: "user" };
-    const updatedMessages = [...messages, userMessage];
-    setMessages(updatedMessages);
-    setInputValue("");
-    setIsLoading(true);
+  const userMessage = { text: messageToSend, sender: "user" };
+  const updatedMessages = [...messages, userMessage];
+  setMessages(updatedMessages);
+  setInputValue("");
+  setIsLoading(true);
 
-    try {
-      const payload = {
-        messages: [
-          {
-            role: "system",
-            content:
-              "You are a helpful portfolio assistant for Vishal. Keep responses concise and helpful. Answer questions about Vishal's skills, projects, experience, and background.",
-          },
-          ...updatedMessages.slice(-4).map((msg) => ({
-            role: msg.sender === "bot" ? "assistant" : "user",
-            content: msg.text,
-          })),
-        ],
-      };
-
-      // ✅ CORRECT BACKEND URL
-      const BACKEND_URL =
-        "https://portfoliovd-production.up.railway.app/api/chat";
-
-      console.log("🚀 Sending request to:", BACKEND_URL);
-
-      const response = await fetch(BACKEND_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      console.log("📥 Response status:", response.status);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("❌ Server error response:", errorText);
-        throw new Error(`Server error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("✅ API Response received:", data);
-
-      if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-        throw new Error("Invalid API response format");
-      }
-
-      const botMessage = data.choices[0].message.content;
-      setMessages((prev) => [...prev, { text: botMessage, sender: "bot" }]);
-    } catch (error) {
-      console.error("💥 Chat Error:", error);
-      setMessages((prev) => [
-        ...prev,
+  try {
+    const payload = {
+      messages: [
         {
-          text: "Sorry, I'm having trouble responding right now. Please try again later.",
-          sender: "bot",
+          role: "system",
+          content: "You are a helpful portfolio assistant for Vishal. Keep responses concise and helpful. Answer questions about Vishal's skills, projects, experience, and background.",
         },
-      ]);
-    } finally {
-      setIsLoading(false);
+        ...updatedMessages.slice(-4).map((msg) => ({
+          role: msg.sender === "bot" ? "assistant" : "user",
+          content: msg.text,
+        })),
+      ],
+    };
+
+    // ✅ CORRECT URL
+    const BACKEND_URL = "https://portfoliovd-production.up.railway.app/api/chat";
+
+    console.log("Sending request to:", BACKEND_URL);
+
+    const response = await fetch(BACKEND_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    console.log("Response status:", response.status);
+
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
     }
-  };
+
+    const data = await response.json();
+    console.log("API Response:", data);
+
+    if (!data.choices || !data.choices[0]) {
+      throw new Error("Invalid API response format");
+    }
+
+    const botMessage = data.choices[0].message.content;
+    setMessages((prev) => [...prev, { text: botMessage, sender: "bot" }]);
+  } catch (error) {
+    console.error("Chat Error:", error);
+    setMessages((prev) => [
+      ...prev,
+      {
+        text: "Sorry, I'm having trouble responding right now. Please try again later.",
+        sender: "bot",
+      },
+    ]);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div
