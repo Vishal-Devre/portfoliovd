@@ -78,11 +78,11 @@ const Chatbot = ({ isOpen, onClose }) => {
         ],
       };
 
-      // ✅ Backend URL - Railway wala use karo
+      // ✅ CORRECT BACKEND URL
       const BACKEND_URL =
         "https://portfoliovd-production.up.railway.app/api/chat";
 
-      console.log("Sending request to:", BACKEND_URL);
+      console.log("🚀 Sending request to:", BACKEND_URL);
 
       const response = await fetch(BACKEND_URL, {
         method: "POST",
@@ -92,25 +92,25 @@ const Chatbot = ({ isOpen, onClose }) => {
         body: JSON.stringify(payload),
       });
 
-      console.log("Response status:", response.status);
+      console.log("📥 Response status:", response.status);
 
       if (!response.ok) {
-        throw new Error(
-          `Server error: ${response.status} ${response.statusText}`
-        );
+        const errorText = await response.text();
+        console.error("❌ Server error response:", errorText);
+        throw new Error(`Server error: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("API Response:", data);
+      console.log("✅ API Response received:", data);
 
-      if (!data.choices || !data.choices[0]) {
+      if (!data.choices || !data.choices[0] || !data.choices[0].message) {
         throw new Error("Invalid API response format");
       }
 
       const botMessage = data.choices[0].message.content;
       setMessages((prev) => [...prev, { text: botMessage, sender: "bot" }]);
     } catch (error) {
-      console.error("Chat Error:", error);
+      console.error("💥 Chat Error:", error);
       setMessages((prev) => [
         ...prev,
         {
