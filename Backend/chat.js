@@ -1,29 +1,28 @@
 import express from "express";
 import fetch from "node-fetch";
+import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const router = express.Router();
+const app = express();
 
-// ✅ CORS FIX - Ye sabse pehle
-router.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
-  
-  // Handle preflight
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-  next();
+// CORS Fix
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "OPTIONS"],
+  credentials: true
+}));
+
+app.use(express.json());
+
+// Health Check
+app.get("/", (req, res) => {
+  res.json({ message: "Chatbot API is running!" });
 });
 
-// ✅ API Route
-router.post("/api/chat", async (req, res) => {
-  // ✅ CORS headers explicitly set karo
-  res.header("Access-Control-Allow-Origin", "*");
-  
+// Chat API Route
+app.post("/api/chat", async (req, res) => {
   try {
     console.log("📨 Chat request received");
     
@@ -32,7 +31,7 @@ router.post("/api/chat", async (req, res) => {
       headers: {
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://portfoliovd-production.up.railway.app/",
+        "HTTP-Referer": "https://portfoliovd-production.up.railway.app",
         "X-Title": "Portfolio Chatbot"
       },
       body: JSON.stringify({
@@ -42,7 +41,7 @@ router.post("/api/chat", async (req, res) => {
     });
 
     if (!response.ok) {
-      throw new Error(`OpenRouter error: ${response.status}`);
+      throw new Error(`API error: ${response.status}`);
     }
 
     const data = await response.json();
@@ -50,19 +49,11 @@ router.post("/api/chat", async (req, res) => {
     
   } catch (error) {
     console.error("❌ Error:", error);
-    res.status(500).json({ 
-      error: "Internal server error",
-      message: error.message 
-    });
+    res.status(500).json({ error: error.message });
   }
 });
 
-// ✅ OPTIONS route for preflight
-router.options("/api/chat", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.status(200).send();
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
 });
-
-export default router;
