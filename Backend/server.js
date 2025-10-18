@@ -34,7 +34,7 @@ app.post('/api/chat', async (req, res) => {
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://your-app.railway.app',
+        'HTTP-Referer': 'https://portfoliovd-production.up.railway.app/',
         'X-Title': 'Portfolio Chatbot'
       },
       body: JSON.stringify({
