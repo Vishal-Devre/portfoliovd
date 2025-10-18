@@ -1,59 +1,38 @@
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
 import fetch from "node-fetch";
-import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-const app = express();
+const router = express.Router();
 
-// ✅ CORS - SABSE PEHLE (BEFORE any other middleware)
-app.use(cors({
-  origin: "*", // All origins allow karo
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-}));
-
-// ✅ Pre-flight requests handle karo
-app.options("*", (req, res) => {
+// ✅ CORS FIX - Ye sabse pehle
+router.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
-  res.sendStatus(200);
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+  
+  // Handle preflight
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  next();
 });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// ✅ Health check
-app.get("/", (req, res) => {
-  res.json({ 
-    message: "Portfolio Chatbot API is running!",
-    timestamp: new Date().toISOString()
-  });
-});
-
-// ✅ API route
-app.post("/api/chat", async (req, res) => {
-  // ✅ CORS headers manually bhi add karo
+// ✅ API Route
+router.post("/api/chat", async (req, res) => {
+  // ✅ CORS headers explicitly set karo
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
   
   try {
-    console.log("Received chat request");
+    console.log("📨 Chat request received");
     
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://portfoliovd-five.vercel.app/",
+        "HTTP-Referer": "https://portfoliovd-production.up.railway.app/",
         "X-Title": "Portfolio Chatbot"
       },
       body: JSON.stringify({
@@ -68,22 +47,22 @@ app.post("/api/chat", async (req, res) => {
 
     const data = await response.json();
     res.json(data);
+    
   } catch (error) {
-    console.error("Server error:", error);
+    console.error("❌ Error:", error);
     res.status(500).json({ 
       error: "Internal server error",
-      details: error.message 
+      message: error.message 
     });
   }
 });
 
-// ✅ SPA routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// ✅ OPTIONS route for preflight
+router.options("/api/chat", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.status(200).send();
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Server running on port ${PORT}`);
-  console.log(`✅ CORS enabled for ALL origins`);
-});
+export default router;
