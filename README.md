@@ -9,8 +9,7 @@ A modern, responsive showcase of my frontend skills.
 ## *✨ Features*  
 - 🎨 *6 Dynamic Themes + Dark Mode*  
 - 🚀 *GSAP & AOS Animation* (60 FPS optimized)  
-- 📱 *Fully Responsive* (Mobile to 4K)  
-- 📩 *EmailJS Contact Form* (Messages sent directly to your inbox) 
+- 📱 *Fully Responsive* (Mobile to 4K) 
 
 ## *🛠 Tech Stack*  
 - *Frontend*: React + Vite  
